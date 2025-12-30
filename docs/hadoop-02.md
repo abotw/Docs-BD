@@ -92,7 +92,7 @@ This tells Hadoop where the NameNode is and where to store data.
     <!-- 指定 NameNode 的地址 -->
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://master:8020</value>
+        <value>hdfs://hadoop01:8020</value>
     </property>
 
     <!-- 指定 Hadoop 数据的存储目录 -->
@@ -136,13 +136,13 @@ Defines web addresses and data redundancy.
     <!-- NN Web 端访问地址 -->
     <property>
         <name>dfs.namenode.http-address</name>
-        <value>master:9870</value>
+        <value>hadoop01:9870</value>
     </property>
 
     <!-- 2NN Web 端访问地址 -->
     <property>
         <name>dfs.namenode.secondary.http-address</name>
-        <value>node2:9868</value>
+        <value>hadoop03:9868</value>
     </property>
 
     <!-- 测试环境指定 HDFS 副本数量为 1 -->
@@ -220,7 +220,7 @@ Designates the Resource Manager and sets memory limits.
     <!-- 设置日志聚集服务器地址 -->
     <property>
         <name>yarn.log.server.url</name>
-        <value>http://master:19888/jobhistory/logs</value>
+        <value>http://hadoop01:19888/jobhistory/logs</value>
     </property>
 
     <!-- 设置日志保留时间为 7 天 -->
@@ -246,13 +246,13 @@ Tells MapReduce to run on YARN.
     <!-- 历史服务器端地址 -->
     <property>
         <name>mapreduce.jobhistory.address</name>
-        <value>master:10020</value>
+        <value>hadoop01:10020</value>
     </property>
 
     <!-- 历史服务器 Web 端地址 -->
     <property>
         <name>mapreduce.jobhistory.webapp.address</name>
-        <value>master:19888</value>
+        <value>hadoop01:19888</value>
     </property>
 </configuration>
 ```
@@ -289,10 +289,7 @@ hadoop03
     start-yarn.sh
     ```
 
-------
-
 -   HDFS Web: http://hadoop01:9870/
--   
 
 ## Step 5: Automation Script (`hdp.sh`)
 
