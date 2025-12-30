@@ -297,40 +297,35 @@ Create a script in `/root/bin/hdp.sh` to start/stop everything at once.
 
 ```Bash
 #!/bin/bash
-
-if [ $# -lt 1 ]; then
+if [ $# -lt 1 ]
+then
     echo "No Args Input..."
-    exit
+    exit ;
 fi
-
 case $1 in
-    start)
-        echo "=================== 启动 Hadoop 集群 ==================="
+"start")
+        echo " =================== 启动 hadoop集群 ==================="
 
-        echo "--------------- 启动 HDFS ---------------"
+        echo " --------------- 启动 hdfs ---------------"
         ssh master "start-dfs.sh"
-
-        echo "--------------- 启动 YARN ---------------"
+        echo " --------------- 启动 yarn ---------------"
         ssh node1 "start-yarn.sh"
-
-        echo "--------------- 启动 HistoryServer ---------------"
+        echo " --------------- 启动 historyserver ---------------"
         ssh master "mapred --daemon start historyserver"
-        ;;
-    stop)
-        echo "=================== 关闭 Hadoop 集群 ==================="
+;;
+"stop")
+        echo " =================== 关闭 hadoop集群 ==================="
 
-        echo "--------------- 关闭 HistoryServer ---------------"
+        echo " --------------- 关闭 historyserver ---------------"
         ssh master "mapred --daemon stop historyserver"
-
-        echo "--------------- 关闭 YARN ---------------"
+        echo " --------------- 关闭 yarn ---------------"
         ssh node1 "stop-yarn.sh"
-
-        echo "--------------- 关闭 HDFS ---------------"
+        echo " --------------- 关闭 hdfs ---------------"
         ssh master "stop-dfs.sh"
-        ;;
-    *)
-        echo "Input Args Error..."
-        ;;
+;;
+*)
+    echo "Input Args Error..."
+;;
 esac
 ```
 
