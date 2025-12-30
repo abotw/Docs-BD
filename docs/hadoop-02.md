@@ -289,7 +289,7 @@ hadoop03
     start-yarn.sh
     ```
 
--   HDFS Web: http://hadoop01:9870/
+-   HDFS Web: [http://192.168.184.31:9870/](http://192.168.184.31:9870/)
 
 ## Step 5: Automation Script (`hdp.sh`)
 
