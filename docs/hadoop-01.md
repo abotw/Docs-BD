@@ -101,7 +101,7 @@ Hadoop is built on Java, so a specific version (JDK 1.8) is required.
 
     Check the version by running `java -version`. You should see "1.8.0_212" in the output.
 
-### Key Commands Explained for Beginners
+## Key Commands Explained for Beginners
 
 -   **`vim`**: A text editor used in the terminal to modify configuration files.
 -   **`systemctl stop/disable`**: Used to turn off services immediately and prevent them from starting when the computer reboots.
