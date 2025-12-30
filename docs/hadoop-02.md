@@ -6,7 +6,7 @@ In this guide, we will build a 3-node cluster. We will use **hadoop01** as our m
 
 ## Step 1: Setting up SSH Password-less Login
 
-Hadoop nodes need to communicate with each other automatically. SSH keys allow them to log in to one another without a password1.
+Hadoop nodes need to communicate with each other automatically. SSH keys allow them to log in to one another without a password.
 
 ### On hadoop01 (The Master):
 
@@ -28,7 +28,7 @@ Hadoop nodes need to communicate with each other automatically. SSH keys allow t
 
 ### On hadoop02 (The Resource Manager):
 
-Repeat the process so hadoop02 can also talk to the others2:
+Repeat the process so hadoop02 can also talk to the others:
 
 ```Bash
 ssh-keygen -t rsa
@@ -41,13 +41,14 @@ ssh-copy-id hadoop03
 
 ## Step 2: Hadoop Installation & Environment
 
-Now we prepare the Hadoop software and tell the system where to find it3.
+Now we prepare the Hadoop software and tell the system where to find it.
 
 1.  **Extract the software**:
 
     ```Bash
     # Move your tar package to /usr/local/soft
     tar -zxvf hadoop-3.3.4.tar.gz
+    # Rename
     mv hadoop-3.3.4 hadoop
     ```
 
@@ -82,66 +83,176 @@ Now we prepare the Hadoop software and tell the system where to find it3.
 
 We need to edit 5 main configuration files in `/usr/local/soft/hadoop/etc/hadoop/`.
 
-### 1. core-site.xml (The Core)
+### 1. `core-site.xml` (The Core)
 
 This tells Hadoop where the NameNode is and where to store data.
 
 ```XML
 <configuration>
+    <!-- 指定 NameNode 的地址 -->
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://hadoop01:8020</value>
+        <value>hdfs://master:8020</value>
     </property>
+
+    <!-- 指定 Hadoop 数据的存储目录 -->
     <property>
         <name>hadoop.tmp.dir</name>
         <value>/usr/local/soft/hadoop/data</value>
     </property>
+
+    <!-- 配置 HDFS Web 登录使用的静态用户为 root -->
+    <property>
+        <name>hadoop.http.staticuser.user</name>
+        <value>root</value>
+    </property>
+
+    <!-- 配置 root (superUser) 允许通过代理访问的主机节点 -->
+    <property>
+        <name>hadoop.proxyuser.root.hosts</name>
+        <value>*</value>
+    </property>
+
+    <!-- 配置 root (superUser) 允许通过代理用户所属组 -->
+    <property>
+        <name>hadoop.proxyuser.root.groups</name>
+        <value>*</value>
+    </property>
+
+    <!-- 配置 root (superUser) 允许通过代理的用户 -->
+    <property>
+        <name>hadoop.proxyuser.root.users</name>
+        <value>*</value>
+    </property>
 </configuration>
 ```
 
-### 2. hdfs-site.xml (The Storage)
+### 2. `hdfs-site.xml` (The Storage)
 
 Defines web addresses and data redundancy.
 
 ```XML
 <configuration>
+    <!-- NN Web 端访问地址 -->
     <property>
         <name>dfs.namenode.http-address</name>
-        <value>hadoop01:9870</value>
+        <value>master:9870</value>
     </property>
+
+    <!-- 2NN Web 端访问地址 -->
     <property>
         <name>dfs.namenode.secondary.http-address</name>
-        <value>hadoop03:9868</value>
+        <value>node2:9868</value>
+    </property>
+
+    <!-- 测试环境指定 HDFS 副本数量为 1 -->
+    <property>
+        <name>dfs.replication</name>
+        <value>1</value>
     </property>
 </configuration>
 ```
 
-### 3. yarn-site.xml (The Manager)
+### 3. `yarn-site.xml` (The Manager)
 
 Designates the Resource Manager and sets memory limits.
 
 ```XML
 <configuration>
-    <property>
-        <name>yarn.resourcemanager.hostname</name>
-        <value>hadoop02</value>
-    </property>
+    <!-- 指定 MR 使用 shuffle 服务 -->
     <property>
         <name>yarn.nodemanager.aux-services</name>
         <value>mapreduce_shuffle</value>
     </property>
+
+    <!-- 指定 ResourceManager 的地址 -->
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>node1</value>
+    </property>
+
+    <!-- 环境变量的继承 -->
+    <property>
+        <name>yarn.nodemanager.env-whitelist</name>
+        <value>
+            JAVA_HOME,
+            HADOOP_COMMON_HOME,
+            HADOOP_HDFS_HOME,
+            HADOOP_CONF_DIR,
+            CLASSPATH_PREPEND_DISTCACHE,
+            HADOOP_YARN_HOME,
+            HADOOP_MAPRED_HOME
+        </value>
+    </property>
+
+    <!-- Yarn 单个容器允许分配的最小 / 最大内存 -->
+    <property>
+        <name>yarn.scheduler.minimum-allocation-mb</name>
+        <value>512</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>4096</value>
+    </property>
+
+    <!-- Yarn 容器可管理的物理内存大小 -->
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>4096</value>
+    </property>
+
+    <!-- 关闭 Yarn 对物理内存和虚拟内存的限制检查 -->
+    <property>
+        <name>yarn.nodemanager.pmem-check-enabled</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.vmem-check-enabled</name>
+        <value>false</value>
+    </property>
+
+    <!-- 开启日志聚集功能 -->
+    <property>
+        <name>yarn.log-aggregation-enable</name>
+        <value>true</value>
+    </property>
+
+    <!-- 设置日志聚集服务器地址 -->
+    <property>
+        <name>yarn.log.server.url</name>
+        <value>http://master:19888/jobhistory/logs</value>
+    </property>
+
+    <!-- 设置日志保留时间为 7 天 -->
+    <property>
+        <name>yarn.log-aggregation.retain-seconds</name>
+        <value>604800</value>
+    </property>
 </configuration>
 ```
 
-### 4. mapred-site.xml (The Engine)
+### 4. `mapred-site.xml` (The Engine)
 
 Tells MapReduce to run on YARN.
 
 ```XML
 <configuration>
+    <!-- 指定 MapReduce 程序运行在 YARN 上 -->
     <property>
         <name>mapreduce.framework.name</name>
         <value>yarn</value>
+    </property>
+
+    <!-- 历史服务器端地址 -->
+    <property>
+        <name>mapreduce.jobhistory.address</name>
+        <value>master:10020</value>
+    </property>
+
+    <!-- 历史服务器 Web 端地址 -->
+    <property>
+        <name>mapreduce.jobhistory.webapp.address</name>
+        <value>master:19888</value>
     </property>
 </configuration>
 ```
@@ -180,24 +291,56 @@ hadoop03
 
 ------
 
+-   HDFS Web: http://hadoop01:9870/
+-   
+
 ## Step 5: Automation Script (`hdp.sh`)
 
 Create a script in `/root/bin/hdp.sh` to start/stop everything at once.
 
 ```Bash
 #!/bin/bash
+
+if [ $# -lt 1 ]; then
+    echo "No Args Input..."
+    exit
+fi
+
 case $1 in
-"start")
-    ssh hadoop01 "start-dfs.sh" [cite: 238]
-    ssh hadoop02 "start-yarn.sh" [cite: 240]
-    ssh hadoop01 "mapred --daemon start historyserver" [cite: 242]
-;;
-"stop")
-    ssh hadoop01 "mapred --daemon stop historyserver" [cite: 247]
-    ssh hadoop02 "stop-yarn.sh" [cite: 249]
-    ssh hadoop01 "stop-dfs.sh" [cite: 251]
-;;
+    start)
+        echo "=================== 启动 Hadoop 集群 ==================="
+
+        echo "--------------- 启动 HDFS ---------------"
+        ssh master "start-dfs.sh"
+
+        echo "--------------- 启动 YARN ---------------"
+        ssh node1 "start-yarn.sh"
+
+        echo "--------------- 启动 HistoryServer ---------------"
+        ssh master "mapred --daemon start historyserver"
+        ;;
+    stop)
+        echo "=================== 关闭 Hadoop 集群 ==================="
+
+        echo "--------------- 关闭 HistoryServer ---------------"
+        ssh master "mapred --daemon stop historyserver"
+
+        echo "--------------- 关闭 YARN ---------------"
+        ssh node1 "stop-yarn.sh"
+
+        echo "--------------- 关闭 HDFS ---------------"
+        ssh master "stop-dfs.sh"
+        ;;
+    *)
+        echo "Input Args Error..."
+        ;;
 esac
 ```
 
 **Don't forget to give it permission**: `chmod +x hdp.sh`. You can now verify everything is running by typing `jps` on each node.
+
+```sh
+ hdp.sh stop
+ hdp.sh start
+```
+
