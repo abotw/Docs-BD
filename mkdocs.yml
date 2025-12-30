@@ -1,0 +1,19 @@
+site_name: BD Docs
+site_url: http://abotw.github.io/Docs-BD
+repo_url: https://github.com/abotw/Docs-BD
+theme:
+  name: material
+  features:
+    - content.code.copy
+    - search.suggest
+    - search.highlight
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+plugins:
+  - search
