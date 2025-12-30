@@ -309,26 +309,26 @@ case $1 in
         echo "=================== Starting Hadoop Cluster ==================="
 
         echo "--------------- Starting HDFS ---------------"
-        ssh master "start-dfs.sh"
+        ssh hadoop01 "start-dfs.sh"
 
         echo "--------------- Starting YARN ---------------"
-        ssh node1 "start-yarn.sh"
+        ssh hadoop02 "start-yarn.sh"
 
         echo "--------------- Starting HistoryServer ---------------"
-        ssh master "mapred --daemon start historyserver"
+        ssh hadoop01 "mapred --daemon start historyserver"
         ;;
 
     "stop")
         echo "=================== Stopping Hadoop Cluster ==================="
 
         echo "--------------- Stopping HistoryServer ---------------"
-        ssh master "mapred --daemon stop historyserver"
+        ssh hadoop01 "mapred --daemon stop historyserver"
 
         echo "--------------- Stopping YARN ---------------"
-        ssh node1 "stop-yarn.sh"
+        ssh hadoop02 "stop-yarn.sh"
 
         echo "--------------- Stopping HDFS ---------------"
-        ssh master "stop-dfs.sh"
+        ssh hadoop01 "stop-dfs.sh"
         ;;
 
     *)
