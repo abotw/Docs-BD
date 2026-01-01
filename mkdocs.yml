@@ -1,6 +1,6 @@
-site_name: BD Docs
-site_url: http://abotw.github.io/Docs-BD
-repo_url: https://github.com/abotw/Docs-BD
+site_name: Big Data Docs
+site_url: http://abotw.github.io/docs-bd
+repo_url: https://github.com/abotw/docs-bd
 theme:
   name: material
   features:
