@@ -1,4 +1,4 @@
-# Hadoop-02
+# Hadoop-02: Cluster Setup and Configuration
 
 In this guide, we will build a 3-node cluster. We will use **hadoop01** as our master node, **hadoop02** as our Resource Manager, and **hadoop03** for backup services.
 
