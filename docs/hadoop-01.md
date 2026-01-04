@@ -4,7 +4,7 @@ date: Tue Dec 30 13:30:24 CST 2025
 
 # Hadoop-01: Cluster Setup and Configuration
 
-Before installing **Hadoop**, you must prepare the environment across multiple virtual machines. The following steps must be performed on all three machines in the cluster (`handoop01`, `handoop02`, and `handoop03`).
+Before installing **Hadoop**, you must prepare the environment across multiple virtual machines. The following steps must be performed on all three machines in the cluster (`handoop01`, `handoop02`, and `hadoop03`).
 
 ## 1. Cluster Planning
 
@@ -14,7 +14,7 @@ A successful deployment requires a clear map of which services run on which hard
 | ------------- | -------------- | ------------------------------------------------- |
 | **hadoop01**  | 192.168.184.31 | JDK 1.8, NameNode, DataNode, NodeManager          |
 | **hadoop02**  | 192.168.184.32 | JDK 1.8, ResourceManager, DataNode, NodeManager   |
-| **handoop03** | 192.168.184.33 | JDK 1.8, DataNode, NodeManager, SecondaryNameNode |
+| **hadoop03**  | 192.168.184.33 | JDK 1.8, DataNode, NodeManager, SecondaryNameNode |
 
 ## 2. Basic Environment Configuration
 
@@ -58,6 +58,8 @@ To ensure nodes can always find each other, we must change the dynamic IP to a *
     192.168.184.32 hadoop02
     192.168.184.33 hadoop03
     ```
+    
+    Pattern: `IPADDR HOSTNAME`
 
 ### C. Update Package Repository (Yum Sources)
 
@@ -65,12 +67,13 @@ We switch to Aliyun mirrors to speed up software downloads in China.
 
 ```bash
 cd /etc/yum.repos.d
-mv CentOS-Base.repo CentOS-Base.repo.backup  # Backup original
-wget http://mirrors.aliyun.com/repo/Centos-7.repo # Download new source 
-mv Centos-7.repo CentOS-Base.repo # Set as default
+# 1. Backup original
+mv CentOS-Base.repo CentOS-Base.repo.backup
+# 2. Download new source
+wget http://mirrors.aliyun.com/repo/Centos-7.repo
+# 3. Set as default
+mv Centos-7.repo CentOS-Base.repo
 ```
-
-------
 
 ## 3. Java Development Kit (JDK) Installation
 
@@ -80,6 +83,17 @@ Hadoop is built on Java, so a specific version (JDK 1.8) is required.
 
     `rpm -qa | grep -i java | xargs -n1 rpm -e --nodeps`
 
+    -q: **q**uery
+
+    -a: **a**ll
+
+    -i: case **i**nsensitive
+
+    -e: **e**rase
+    deps: **dep**endencie**s**
+
+    -n: **n**ext
+
 2.  Create Installation Directory:
 
     `mkdir -p /usr/local/soft`
@@ -87,6 +101,8 @@ Hadoop is built on Java, so a specific version (JDK 1.8) is required.
 3.  Extract JDK: Upload your `jdk-8u212-linux-x64.tar.gz` to the folder and extract it.
 
     `tar -zxvf jdk-8u212-linux-x64.tar.gz`
+
+    `tar -xzvf` - to extract a .tgz or .tar.gz archive
 
 4.  **Set Environment Variables**: This tells the system where Java is located. Create a new script `vim /etc/profile.d/my_env.sh` and add:
 
