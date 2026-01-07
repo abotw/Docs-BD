@@ -1,3 +1,7 @@
+---
+status: done
+---
+
 # Hadoop-01: Intro
 
 *A Gentle Introduction to Apache Hadoop*
