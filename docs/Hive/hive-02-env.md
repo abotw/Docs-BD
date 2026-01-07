@@ -1,4 +1,4 @@
-# Hive 3.1.3 Installation and Configuration Guide
+# Hive-02: Installation
 
 This guide provides the steps to deploy Hive 3.1.3 on a Linux environment and configure MySQL as the remote metastore to ensure metadata persistence and support for multi-user access.
 

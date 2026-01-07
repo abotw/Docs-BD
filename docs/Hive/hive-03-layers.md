@@ -1,6 +1,6 @@
-# ODS–DWD–DWS–ADS in Hive
+# Hive-03: Layering
 
-*A Beginner’s Guide to Data Warehouse Layering*
+*A Beginner’s Guide to Data Warehouse*
 
 ## 1. Why Do We Need Data Warehouse Layers?
 
