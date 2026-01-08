@@ -1,6 +1,6 @@
-# MySQL: 8.0.31 Installation
+# ENV: MySQL
 
-This document provides a step-by-step procedure for installing MySQL 8.0.31 on a Linux system (e.g., CentOS 7) using RPM packages and an automated configuration script.
+This document provides a step-by-step procedure for installing **MySQL 8.0.31 on a Linux system** (e.g., CentOS 7) using RPM packages and an automated configuration script.
 
 ## 1. Preparation & Package Upload
 
