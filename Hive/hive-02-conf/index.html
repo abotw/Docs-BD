@@ -1,0 +1,1976 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="http://abotw.github.io/docs-bd/Hive/hive-02-conf/">
+      
+      
+        <link rel="prev" href="../hive-01-intro/">
+      
+      
+        <link rel="next" href="../hive-03-layers/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Hive-02: Conf - Big Data Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#hive-02-conf" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Big Data Docs" class="md-header__button md-logo" aria-label="Big Data Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Big Data Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Hive-02: Conf
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/abotw/docs-bd" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Big Data Docs" class="md-nav__button md-logo" aria-label="Big Data Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Big Data Docs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/abotw/docs-bd" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Data Docs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datax/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DataX
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../env-mysql/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ENV: MySQL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Logs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hadoop
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hadoop
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Hadoop/hadoop-01-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hadoop-01: Intro
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Hadoop/hadoop-02-cluster/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hadoop-02: Cluster Setup
+  
+
+    
+  </span>
+  
+  
+    
+  
+  
+    <span class="md-status md-status--done"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hive
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hive
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive-01-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hive-01: Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hive-02: Conf
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hive-02: Conf
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-apache-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What is Apache Hive?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. What is Apache Hive?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-operating-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Operating System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-java-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Java (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hadoop-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Hadoop (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-download-apache-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Download Apache Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Download Apache Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-choose-a-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Choose a Version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-download-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Download Hive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-install-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Install Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Install Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-extract-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Extract Hive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configure-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Configure Environment Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Configure Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-edit-etcprofile-or-bashrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Edit /etc/profile (or ~/.bashrc)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-resolving-library-conflicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Resolving Library Conflicts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-configure-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Configure Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Configure Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-create-hive-sitexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Create hive-site.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-configure-metastore-very-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Configure Metastore (Very Important)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-install-and-configure-mysql-metastore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Install and Configure MySQL (Metastore)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Install and Configure MySQL (Metastore)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-install-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Install MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-create-hive-metastore-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Create Hive Metastore Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-add-mysql-jdbc-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Add MySQL JDBC Driver
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-edit-hive-sitexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Edit hive-site.xml
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-initialize-hive-metastore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Initialize Hive Metastore
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Initialize Hive Metastore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-create-warehouse-directory-in-hdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Create Warehouse Directory in HDFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-initialize-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Initialize Schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-fixing-character-encoding-for-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Fixing Character Encoding for Comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-start-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Start Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Start Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-start-hive-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Start Hive Shell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-test-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Test Hive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-common-problems-for-beginners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Common Problems for Beginners
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Common Problems for Beginners">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-javalangnosuchmethoderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 java.lang.NoSuchMethodError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-cannot-connect-to-metastore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Cannot Connect to Metastore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-permission-denied-in-hdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Permission Denied in HDFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-hive-configuration-files-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Hive Configuration Files Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-quick-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quick Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hive-03-layers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hive-03: Layering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-what-is-apache-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. What is Apache Hive?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. What is Apache Hive?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key features
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-operating-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 Operating System
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-java-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 Java (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-hadoop-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.3 Hadoop (Required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-download-apache-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Download Apache Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Download Apache Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-choose-a-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.1 Choose a Version
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-download-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3.2 Download Hive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-install-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Install Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Install Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-extract-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4.1 Extract Hive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configure-environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Configure Environment Variables
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Configure Environment Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-edit-etcprofile-or-bashrc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.1 Edit /etc/profile (or ~/.bashrc)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52-resolving-library-conflicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5.2 Resolving Library Conflicts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-configure-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Configure Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Configure Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-create-hive-sitexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.1 Create hive-site.xml
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-configure-metastore-very-important" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6.2 Configure Metastore (Very Important)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-install-and-configure-mysql-metastore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Install and Configure MySQL (Metastore)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Install and Configure MySQL (Metastore)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-install-mysql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Install MySQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-create-hive-metastore-database" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Create Hive Metastore Database
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-add-mysql-jdbc-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Add MySQL JDBC Driver
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-edit-hive-sitexml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Edit hive-site.xml
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-initialize-hive-metastore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Initialize Hive Metastore
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Initialize Hive Metastore">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-create-warehouse-directory-in-hdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.1 Create Warehouse Directory in HDFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-initialize-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.2 Initialize Schema
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-fixing-character-encoding-for-comments" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9.3 Fixing Character Encoding for Comments
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-start-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Start Hive
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Start Hive">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#101-start-hive-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.1 Start Hive Shell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#102-test-hive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10.2 Test Hive
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-common-problems-for-beginners" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Common Problems for Beginners
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Common Problems for Beginners">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-javalangnosuchmethoderror" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.1 java.lang.NoSuchMethodError
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-cannot-connect-to-metastore" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.2 Cannot Connect to Metastore
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-permission-denied-in-hdfs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11.3 Permission Denied in HDFS
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-hive-configuration-files-summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Hive Configuration Files Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-quick-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Quick Checklist
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="hive-02-conf">Hive-02: Conf</h1>
+<h2 id="1-what-is-apache-hive">1. What is Apache Hive?</h2>
+<p><strong>Apache Hive</strong> is a <strong>data warehouse system</strong> built on top of <strong>Hadoop</strong>.
+It allows you to query large datasets stored in <strong>HDFS</strong> using <strong>SQL-like language (HiveQL)</strong> instead of writing complex MapReduce code.</p>
+<h3 id="key-features">Key features</h3>
+<ul>
+<li>SQL-like syntax (easy to learn)</li>
+<li>Runs on Hadoop</li>
+<li>Suitable for batch data analysis</li>
+<li>Commonly used in big data platforms</li>
+</ul>
+<hr />
+<h2 id="2-prerequisites">2. Prerequisites</h2>
+<p>Before installing Hive, make sure the following components are installed and working.</p>
+<h3 id="21-operating-system">2.1 Operating System</h3>
+<ul>
+<li>Linux (CentOS / Rocky Linux / Ubuntu)</li>
+<li>64-bit system</li>
+</ul>
+<h3 id="22-java-required">2.2 Java (Required)</h3>
+<p>Hive runs on Java.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>java<span class="w"> </span>-version
+</span></code></pre></div>
+<p>Recommended:</p>
+<ul>
+<li><strong>JDK 8</strong> or <strong>JDK 11</strong></li>
+</ul>
+<p>If Java is not installed, install it first.</p>
+<hr />
+<h3 id="23-hadoop-required">2.3 Hadoop (Required)</h3>
+<p>Hive depends on Hadoop (HDFS + YARN).</p>
+<p>Check Hadoop:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>hadoop<span class="w"> </span>version
+</span></code></pre></div>
+<p>Make sure:</p>
+<ul>
+<li>HDFS is running</li>
+<li>You can execute <code>hdfs dfs -ls /</code></li>
+</ul>
+<p>If Hadoop is not installed, install Hadoop <strong>before</strong> Hive.</p>
+<h2 id="3-download-apache-hive">3. Download Apache Hive</h2>
+<h3 id="31-choose-a-version">3.1 Choose a Version</h3>
+<p>It is recommended to match Hive with your Hadoop version.</p>
+<p>Example:</p>
+<ul>
+<li>Hadoop 3.x → Hive 3.x</li>
+</ul>
+<h3 id="32-download-hive">3.2 Download Hive</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/opt
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>wget<span class="w"> </span>https://downloads.apache.org/hive/hive-3.1.3/apache-hive-3.1.3-bin.tar.gz
+</span></code></pre></div>
+<h2 id="4-install-hive">4. Install Hive</h2>
+<h3 id="41-extract-hive">4.1 Extract Hive</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>apache-hive-3.1.3-bin.tar.gz
+</span></code></pre></div>
+<ul>
+<li><code>z</code> - gzip</li>
+<li><code>x</code> - extract</li>
+<li><code>v</code> - verbose</li>
+<li><code>f</code> - file</li>
+</ul>
+<p>Rename for convenience:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>mv<span class="w"> </span>apache-hive-3.1.3-bin<span class="w"> </span>hive
+</span></code></pre></div>
+<p>Hive directory:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/opt/hive
+</span></code></pre></div>
+<h2 id="5-configure-environment-variables">5. Configure Environment Variables</h2>
+<h3 id="51-edit-etcprofile-or-bashrc">5.1 Edit <code>/etc/profile</code> (or <code>~/.bashrc</code>)</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>vi<span class="w"> </span>/etc/profile
+</span></code></pre></div>
+<p>Add the following:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># HIVE_HOME</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HIVE_HOME</span><span class="o">=</span>/opt/hive
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$HIVE_HOME</span>/bin
+</span></code></pre></div>
+<p>Apply:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">source</span><span class="w"> </span>/etc/profile
+</span></code></pre></div>
+<p>Verify:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>hive<span class="w"> </span>--version
+</span></code></pre></div>
+<h2 id="52-resolving-library-conflicts">5.2 Resolving Library Conflicts</h2>
+<p>Hive includes a logging implementation that often conflicts with Hadoop's version. To prevent startup errors, rename the following file in the Hive <code>lib</code> folder:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HIVE_HOME</span>/lib/
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>mv<span class="w"> </span>log4j-slf4j-impl-2.17.1.jar<span class="w"> </span>log4j-slf4j-impl-2.17.1.jar.bak
+</span></code></pre></div>
+<h2 id="6-configure-hive">6. Configure Hive</h2>
+<p>Hive configuration files are located in:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">$HIVE_HOME</span>/conf
+</span></code></pre></div>
+<h3 id="61-create-hive-sitexml">6.1 Create <code>hive-site.xml</code></h3>
+<p>Hive does not provide this file by default.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nb">cd</span><span class="w"> </span><span class="nv">$HIVE_HOME</span>/conf
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>cp<span class="w"> </span>hive-default.xml.template<span class="w"> </span>hive-site.xml
+</span></code></pre></div>
+<hr />
+<h3 id="62-configure-metastore-very-important">6.2 Configure Metastore (Very Important)</h3>
+<p>Hive needs a <strong>metastore</strong> to store table metadata.</p>
+<p>There are three types:</p>
+<ul>
+<li>Embedded Derby (default, <strong>only for testing</strong>)</li>
+<li>MySQL / MariaDB (<strong>recommended</strong>)</li>
+<li>PostgreSQL</li>
+</ul>
+<p>For beginners, <strong>MySQL</strong> is recommended.</p>
+<hr />
+<h2 id="7-install-and-configure-mysql-metastore">7. Install and Configure MySQL (Metastore)</h2>
+<h3 id="71-install-mysql">7.1 Install MySQL</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>yum<span class="w"> </span>install<span class="w"> </span>mysql-server<span class="w"> </span>-y
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>systemctl<span class="w"> </span>start<span class="w"> </span>mysqld
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>mysqld
+</span></code></pre></div>
+<hr />
+<h3 id="72-create-hive-metastore-database">7.2 Create Hive Metastore Database</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mysql<span class="w"> </span>-u<span class="w"> </span>root<span class="w"> </span>-p
+</span></code></pre></div>
+<p>Inside MySQL:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">hive_metastore</span><span class="p">;</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;hive&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;hive&#39;</span><span class="p">;</span>
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">hive_metastore</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;hive&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="n">EXIT</span><span class="p">;</span>
+</span></code></pre></div>
+<hr />
+<h3 id="73-add-mysql-jdbc-driver">7.3 Add MySQL JDBC Driver</h3>
+<p>Download MySQL Connector:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>wget<span class="w"> </span>https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-java-8.0.25.tar.gz
+</span></code></pre></div>
+<p>Extract:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>tar<span class="w"> </span>-zxvf<span class="w"> </span>mysql-connector-java-8.0.25.tar.gz
+</span></code></pre></div>
+<p>Copy JAR to the Hive <code>lib</code> directory so Hive can communicate with the MySQL database.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>cp<span class="w"> </span>mysql-connector-java-8.0.25/mysql-connector-java-8.0.25.jar<span class="w"> </span><span class="nv">$HIVE_HOME</span>/lib/
+</span></code></pre></div>
+<hr />
+<h2 id="8-edit-hive-sitexml">8. Edit <code>hive-site.xml</code></h2>
+<p>Open:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>vi<span class="w"> </span><span class="nv">$HIVE_HOME</span>/conf/hive-site.xml
+</span></code></pre></div>
+<p>Add the following properties <strong>inside <code>&lt;configuration&gt;</code></strong>:</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionURL<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">  </span><span class="nt">&lt;value&gt;</span>jdbc:mysql://localhost:3306/hive_metastore?useSSL=false<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-20-7"><a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">  </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionDriverName<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-20-8"><a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">  </span><span class="nt">&lt;value&gt;</span>com.mysql.cj.jdbc.Driver<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-20-9"><a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-20-10"><a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
+</span><span id="__span-20-11"><a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-20-12"><a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="w">  </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionUserName<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-20-13"><a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="w">  </span><span class="nt">&lt;value&gt;</span>hive<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-20-14"><a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>
+</span><span id="__span-20-16"><a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-20-17"><a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="w">  </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionPassword<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-20-18"><a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a><span class="w">  </span><span class="nt">&lt;value&gt;</span>hive<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-20-19"><a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-20-20"><a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a>
+</span><span id="__span-20-21"><a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-20-22"><a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a><span class="w">  </span><span class="nt">&lt;name&gt;</span>hive.metastore.warehouse.dir<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-20-23"><a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a><span class="w">  </span><span class="nt">&lt;value&gt;</span>/user/hive/warehouse<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-20-24"><a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a><span class="nt">&lt;/property&gt;</span>
+</span></code></pre></div>
+<p>毕业实习的配置如下：</p>
+<div class="language-xml highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="cp">&lt;?xml-stylesheet type=&quot;1.0&quot; href=&quot;configuration.xsl&quot;?&gt;</span>
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nt">&lt;configuration&gt;</span>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionURL<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>jdbc:mysql://hadoop01:3306/metastore?useSSL=false<span class="ni">&amp;amp;</span>useUnicode=true<span class="ni">&amp;amp;</span>characterEncoding=UTF-8<span class="ni">&amp;amp;</span>allowPublicKeyRetrieval=true<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionDriverName<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>com.mysql.cj.jdbc.Driver<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-13"><a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>
+</span><span id="__span-21-14"><a id="__codelineno-21-14" name="__codelineno-21-14" href="#__codelineno-21-14"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-15"><a id="__codelineno-21-15" name="__codelineno-21-15" href="#__codelineno-21-15"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionUserName<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-16"><a id="__codelineno-21-16" name="__codelineno-21-16" href="#__codelineno-21-16"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>root<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-17"><a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-18"><a id="__codelineno-21-18" name="__codelineno-21-18" href="#__codelineno-21-18"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-19"><a id="__codelineno-21-19" name="__codelineno-21-19" href="#__codelineno-21-19"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>javax.jdo.option.ConnectionPassword<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-20"><a id="__codelineno-21-20" name="__codelineno-21-20" href="#__codelineno-21-20"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>000000<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-21"><a id="__codelineno-21-21" name="__codelineno-21-21" href="#__codelineno-21-21"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-22"><a id="__codelineno-21-22" name="__codelineno-21-22" href="#__codelineno-21-22"></a>
+</span><span id="__span-21-23"><a id="__codelineno-21-23" name="__codelineno-21-23" href="#__codelineno-21-23"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-24"><a id="__codelineno-21-24" name="__codelineno-21-24" href="#__codelineno-21-24"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.metastore.warehouse.dir<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-25"><a id="__codelineno-21-25" name="__codelineno-21-25" href="#__codelineno-21-25"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>/user/hive/warehouse<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-26"><a id="__codelineno-21-26" name="__codelineno-21-26" href="#__codelineno-21-26"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-27"><a id="__codelineno-21-27" name="__codelineno-21-27" href="#__codelineno-21-27"></a>
+</span><span id="__span-21-28"><a id="__codelineno-21-28" name="__codelineno-21-28" href="#__codelineno-21-28"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-29"><a id="__codelineno-21-29" name="__codelineno-21-29" href="#__codelineno-21-29"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.server2.thrift.bind.host<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-30"><a id="__codelineno-21-30" name="__codelineno-21-30" href="#__codelineno-21-30"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>hadoop01<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-31"><a id="__codelineno-21-31" name="__codelineno-21-31" href="#__codelineno-21-31"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-32"><a id="__codelineno-21-32" name="__codelineno-21-32" href="#__codelineno-21-32"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-33"><a id="__codelineno-21-33" name="__codelineno-21-33" href="#__codelineno-21-33"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.cli.print.header<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-34"><a id="__codelineno-21-34" name="__codelineno-21-34" href="#__codelineno-21-34"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-35"><a id="__codelineno-21-35" name="__codelineno-21-35" href="#__codelineno-21-35"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-36"><a id="__codelineno-21-36" name="__codelineno-21-36" href="#__codelineno-21-36"></a><span class="w">    </span><span class="nt">&lt;property&gt;</span>
+</span><span id="__span-21-37"><a id="__codelineno-21-37" name="__codelineno-21-37" href="#__codelineno-21-37"></a><span class="w">        </span><span class="nt">&lt;name&gt;</span>hive.cli.print.current.db<span class="nt">&lt;/name&gt;</span>
+</span><span id="__span-21-38"><a id="__codelineno-21-38" name="__codelineno-21-38" href="#__codelineno-21-38"></a><span class="w">        </span><span class="nt">&lt;value&gt;</span>true<span class="nt">&lt;/value&gt;</span>
+</span><span id="__span-21-39"><a id="__codelineno-21-39" name="__codelineno-21-39" href="#__codelineno-21-39"></a><span class="w">    </span><span class="nt">&lt;/property&gt;</span>
+</span><span id="__span-21-40"><a id="__codelineno-21-40" name="__codelineno-21-40" href="#__codelineno-21-40"></a><span class="nt">&lt;/configuration&gt;</span>
+</span></code></pre></div>
+<h2 id="9-initialize-hive-metastore">9. Initialize Hive Metastore</h2>
+<h3 id="91-create-warehouse-directory-in-hdfs">9.1 Create Warehouse Directory in HDFS</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>hdfs<span class="w"> </span>dfs<span class="w"> </span>-mkdir<span class="w"> </span>-p<span class="w"> </span>/user/hive/warehouse
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>hdfs<span class="w"> </span>dfs<span class="w"> </span>-chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/user/hive
+</span></code></pre></div>
+<hr />
+<h3 id="92-initialize-schema">9.2 Initialize Schema</h3>
+<p>Log into MySQL and create the database:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>mysql -uroot -p
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>&gt; CREATE DATABASE metastore;
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>&gt; QUIT;
+</span></code></pre></div>
+<p>Then initializa schema:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>schematool<span class="w"> </span>-initSchema<span class="w"> </span>-dbType<span class="w"> </span>mysql<span class="w"> </span>-verbose
+</span></code></pre></div>
+<p>If successful, you will see:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>schemaTool completed
+</span></code></pre></div>
+<h3 id="93-fixing-character-encoding-for-comments">9.3 Fixing Character Encoding for Comments</h3>
+<p>By default, Hive metastore uses <code>Latin1</code>, which causes issues when using Chinese characters in table or column comments. Modify the following tables in MySQL to support <code>UTF-8</code>:</p>
+<div class="language-SQL highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">USE</span><span class="w"> </span><span class="n">metastore</span><span class="p">;</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1">-- Modify Column Comment Encoding</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">COLUMNS_V2</span><span class="w"> </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="k">COMMENT</span><span class="w"> </span><span class="nb">VARCHAR</span><span class="p">(</span><span class="mi">256</span><span class="p">)</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8</span><span class="p">;</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="c1">-- Modify Table Parameter Encoding</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">TABLE_PARAMS</span><span class="w"> </span><span class="k">MODIFY</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">PARAM_VALUE</span><span class="w"> </span><span class="n">MEDIUMTEXT</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8</span><span class="p">;</span>
+</span></code></pre></div>
+<h2 id="10-start-hive">10. Start Hive</h2>
+<h3 id="101-start-hive-shell">10.1 Start Hive Shell</h3>
+<p>Ensure your Hadoop cluster is running before starting the Hive client:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Start Hadoop</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>hdp.sh<span class="w"> </span>start
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># Launch Hive</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>hive
+</span></code></pre></div>
+<p>You should see:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>hive&gt;
+</span></code></pre></div>
+<hr />
+<h3 id="102-test-hive">10.2 Test Hive</h3>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+</span></code></pre></div>
+<p>Create a database:</p>
+<div class="language-sql highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">testdb</span><span class="p">;</span>
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span>
+</span></code></pre></div>
+<hr />
+<h2 id="11-common-problems-for-beginners">11. Common Problems for Beginners</h2>
+<h3 id="111-javalangnosuchmethoderror">11.1 <code>java.lang.NoSuchMethodError</code></h3>
+<ul>
+<li>Version conflict between Hadoop and Hive</li>
+<li>Ensure compatible versions</li>
+</ul>
+<hr />
+<h3 id="112-cannot-connect-to-metastore">11.2 Cannot Connect to Metastore</h3>
+<p>Check:</p>
+<ul>
+<li>MySQL is running</li>
+<li>JDBC driver is in <code>$HIVE_HOME/lib</code></li>
+<li>Database user/password is correct</li>
+</ul>
+<hr />
+<h3 id="113-permission-denied-in-hdfs">11.3 Permission Denied in HDFS</h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>hdfs<span class="w"> </span>dfs<span class="w"> </span>-chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">777</span><span class="w"> </span>/user/hive
+</span></code></pre></div>
+<hr />
+<h2 id="12-hive-configuration-files-summary">12. Hive Configuration Files Summary</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hive-site.xml</td>
+<td>Main configuration</td>
+</tr>
+<tr>
+<td>hive-env.sh</td>
+<td>Hive environment variables</td>
+</tr>
+<tr>
+<td>hive-log4j2.properties</td>
+<td>Logging</td>
+</tr>
+<tr>
+<td>core-site.xml</td>
+<td>Hadoop config</td>
+</tr>
+<tr>
+<td>hdfs-site.xml</td>
+<td>HDFS config</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="13-next-steps">13. Next Steps</h2>
+<p>After installation, you can learn:</p>
+<ul>
+<li>HiveQL basics (<code>SELECT</code>, <code>WHERE</code>, <code>GROUP BY</code>)</li>
+<li>External vs Managed tables</li>
+<li>ODS / DWD / DWS / ADS architecture</li>
+<li>Hive on Tez / Spark</li>
+</ul>
+<hr />
+<h2 id="14-quick-checklist">14. Quick Checklist</h2>
+<p>✅ Java installed
+✅ Hadoop running
+✅ MySQL metastore configured
+✅ Warehouse directory created
+✅ <code>hive</code> command works</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
