@@ -1,3 +1,7 @@
+---
+status: done
+---
+
 # Hadoop-02: Cluster Setup
 
 ## 1. What Is a Hadoop Cluster?
